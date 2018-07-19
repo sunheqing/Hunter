@@ -38,5 +38,21 @@ class RentHouseItem(scrapy.Item):
     content = scrapy.Field()
     # table = scrapy.Field()  #存入的数据库表单
 
+class DouBanRentHouseItem(scrapy.Item):
+    # 豆瓣租房小组
+    title = scrapy.Field()  # 标题
+    rent_method = scrapy.Field()  # 租赁方式
+    rent_money = scrapy.Field()  # 租金
+    give_money_method = scrapy.Field()  # 付款方式
+    hot = scrapy.Field()  # 热度
+    last_time = scrapy.Field()  # 最后回应时间
+    publish_time = scrapy.Field()  # 发布时间
+    source = scrapy.Field()  # 网址
+    image_url = scrapy.Field()  # 房源主图
+    area = scrapy.Field()  # 所在区域
+    area_lable = scrapy.Field()  # 区域标签
+    phone = scrapy.Field()  # 联系方式
+    house_lable = scrapy.Field()  # 房屋标签
+    content = scrapy.Field()  # 文本内容
 
 

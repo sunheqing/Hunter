@@ -20,7 +20,10 @@ class HunterPipeline(object):
             TIME_AREA = 'Asia/Shanghai'
             spider_get_time = arrow.now(TIME_AREA).format('YYYY-MM-DD HH:mm:ss')
             print u"开始执行数据库操作！"
-            sql_talk_insert="insert into website.news(title,source,origin,time,image_src,news_type,lable,content,spider_get_time) VALUE('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}')".format(item['title'],item['source'],item['origin'],item['time'],item['image_src'],item['news_type'],item['lable'],item['content'],spider_get_time)
+            #sql_talk_insert="insert into website.news(title,source,origin,time,image_src,news_type,lable,content,spider_get_time) VALUE('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}')".format(item['title'],item['source'],item['origin'],item['time'],item['image_src'],item['news_type'],item['lable'],item['content'],spider_get_time)
+            sql_talk_insert = "insert into website.renthouse(title,source,publish_time,last_time,image_url,hot,content,get_time) VALUE('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}')".format(
+                item['title'], item['source'], item['publish_time'], item['last_time'], item['image_url'], item['hot'],
+                item['content'], spider_get_time)
 
             sql(sql_talk_insert)
         except Exception:

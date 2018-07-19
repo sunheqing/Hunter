@@ -13,7 +13,7 @@ def sql(sql_talk):
     try:
         row = cursor.execute(sql_talk)
         db.commit()
-        print u"受影响的行数：" + str(row) + u" 行  （来源:新闻数据库执行函数）"
+        print u"受影响的行数：" + str(row) + u" 行  （来源:豆瓣租房数据库执行函数）"
     except:
         db.rollback()
         print u"执行错误，已经回滚，请检查数据库！"
@@ -34,8 +34,27 @@ sql_talk_create = """CREATE TABLE website.news (
     spider_get_time VARCHAR(50),
     INDEX (id)
 ) AUTO_INCREMENT=0;"""
-'''
 
+sql_talk_create = """CREATE TABLE website.RentHouse (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(100) NOT NULL,
+    source VARCHAR(100),
+    give_money_method VARCHAR(50),
+    get_time VARCHAR(100),
+    image_url VARCHAR(100),
+    rent_method VARCHAR(50),
+    rent_money VARCHAR(50),
+    content VARCHAR(5000),
+    area_lable VARCHAR(150),
+    area VARCHAR(80),
+    phone VARCHAR(50),
+    house_lable VARCHAR(150),
+    hot VARCHAR(20),
+    last_time VARCHAR(50),
+    publish_time VARCHAR(150),
+    INDEX (id)
+) AUTO_INCREMENT=0;"""
+'''
 def clean_content(code_list):
     for code in code_list:
         sql_talk_0 = "select %s,id from website.news" % code
@@ -51,10 +70,10 @@ def clean_content(code_list):
             print row
         except:
             db.rollback()
-time_start = time.time()
+#time_start = time.time()
 #执行数据库操作语句
 #clean_content(["content"])
 #clean_content(["time"])
 
-time_end=time.time()
-print u"程序运行时间："+str(time_end-time_start)+u'秒'
+#time_end=time.time()
+#print u"程序运行时间："+str(time_end-time_start)+u'秒'
