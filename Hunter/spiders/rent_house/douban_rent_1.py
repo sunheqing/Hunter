@@ -5,6 +5,7 @@
 
 from scrapy import Spider, Request
 from Hunter.items import items
+from Hunter.utils_box.proxy_tool import *  #使用代理
 import os
 import re
 from urlparse import urljoin
@@ -14,12 +15,12 @@ class DouBanRentA(Spider):
     name = "douban_rent_1"
     #  url  小组名称
     start_urls = [
-        'https://www.douban.com/group/279962/discussion?start='
+        'https://www.douban.com/group/beijingzufang/discussion?start='
         ]
     start_urls_1 = [
         'https://www.douban.com/group/65239/discussion?start=',   # 北京海淀短期租房  (over)
-        'https://www.douban.com/group/279962/discussion?start=',  # 北京租房（非中介）
-        'https://www.douban.com/group/sweethome/discussion?start=',  # 北京租房（密探）
+        'https://www.douban.com/group/279962/discussion?start=',  # 北京租房（非中介）(over)
+        'https://www.douban.com/group/sweethome/discussion?start=',  # 北京租房（密探）(over)
         'https://www.douban.com/group/beijingzufang/discussion?start=',  # 北京租房
         'https://www.douban.com/group/26926/discussion?start=',   #  北京租房豆瓣
         'https://www.douban.com/group/zhufang/discussion?start=',   #  北京无中介租房（寻天使投资）
@@ -37,9 +38,10 @@ class DouBanRentA(Spider):
     def start_requests(self):
         # 构造每个小组的每一页的url，每个小组抓取1150条数据
         for url in self.start_urls:
-            for i in xrange(0,1150,25):
+            for i in xrange(0,150,25):
                 new_url = url+str(i)
                 yield Request(new_url, self.parse)
+                #yield Request(new_url, self.parse,meta={'proxy':proxy_https}) #使用代理
     def parse(self, response):
         try:
             all_tr = response.xpath('//tr[@class=""]')
