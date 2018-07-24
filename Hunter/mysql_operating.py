@@ -78,6 +78,7 @@ def clean_content(code_list):
             print row
         except:
             db.rollback()
+
 def rent_house_clean_not_use_field():   #清理无效的（发布时间非2018年6、7月份的）
     sql_talk_get_publish_time="select id,publish_time from website.renthouse"
     try:
@@ -92,6 +93,7 @@ def rent_house_clean_not_use_field():   #清理无效的（发布时间非2018�
     except:
         db.rollback()
 
+# 这个函数暂时遗弃
 def rent_house_get_other_field():   #提取租房数据库的其他未获得字段
     sql_talk_get_content_title="select id,title,content from website.renthouse"
     ze_phone_formula = r"[1-9]\d{10}(?!\d)"   #提取联系方式
